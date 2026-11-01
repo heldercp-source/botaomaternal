@@ -155,6 +155,12 @@ body{background:radial-gradient(ellipse at 15% 0%,var(--bg-a,#34549a) 0,transpar
 .j-dress-scene .dress-move-body{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:7px 13px;margin:0 0 6px;border:2px solid #7654a0;border-radius:12px;background:#f5eaff;color:#432660;font-weight:800;touch-action:none;cursor:grab;user-select:none}
 .j-dress-scene .dress-move-body:active{cursor:grabbing;background:#e8d4fa}
 .j-dress-scene .dress-move-body:focus-visible{outline:3px solid #402871;outline-offset:2px}
+
+/* HOME compacta e legibilidade do seletor de desenhos. */
+.adventure-call{padding:8px;margin:10px 0 12px;display:flex;justify-content:center}
+.adventure-call .adventure-start{min-height:46px;padding:9px 16px}
+.j-paint-scene .studio-picker label{color:#fff}
+.j-paint-scene .studio-pic-select,.j-paint-scene .studio-pic-select option{color:#17233e;background-color:#f7edff}
 </style>
 <style>
 /* Identidade visual exclusiva de Conte os animais. Arte local incorporada. */
@@ -392,14 +398,12 @@ body{background:radial-gradient(ellipse at 15% 0%,var(--bg-a,#34549a) 0,transpar
 <noscript>Este navegador está bloqueando JavaScript. Os botões do jogo precisam de JavaScript para funcionar. Abra o arquivo em um navegador completo, como Chrome ou Safari, ou use a opção “servidor local” do seu gerenciador de HTML.</noscript>
 <section class="section" id="worldSection">
  <div class="home-controls" aria-label="Perfil e configurações dos pais"><button class="topbtn" data-action="profile" type="button">🧒 <span id="playerNameTop">Luna</span></button><button class="topbtn" data-action="parents" type="button">🔐 Pais</button></div>
- <div class="home-progress"><span class="statuspill" id="progressPill">0 aventuras · ⭐ 0</span></div>
+ <div class="home-progress" hidden><span class="statuspill" id="progressPill">0 aventuras · ⭐ 0</span></div>
  <div id="worldCompanion" role="status" aria-live="polite"><span class="pipo" aria-hidden="true">🦊</span><span id="companionWords"><strong>Pipo:</strong> Escolha uma janela e vamos descobrir o que existe lá dentro!</span></div>
  <div class="worlds" id="worldGrid"></div>
 </section>
 <section class="adventure-call" aria-label="Continuar aventura">
- <p><strong>✨ Pronto para explorar?</strong><br>Escolha uma área para encontrar brincadeiras e descobertas.</p>
  <button class="adventure-start" type="button" data-action="world" data-world="vila">Começar aventura 🧭</button>
- <span class="statuspill">⭐ Seu progresso é salvo</span>
 </section>
 
 <section class="section" id="activitySection">
@@ -715,7 +719,7 @@ function newRound(){gdata.success=false;gameMsg('');let q,correct,opts;switch(ga
  case 'odd':{let sets=[['🐱','🐶','🐰','🚗'],['🍎','🍌','🍇','👟'],['🔺','🔵','🟩','🐟'],['🚗','🚲','🚌','🌼'],['👕','👗','👖','🍐'],['🐟','🐙','🦀','✏️']];q=chooseUnique(sets);quiz('Qual figura é diferente das outras?','',q[3],q);break}
  case 'vowels':{q=chooseUnique([['A','🐝 ABELHA'],['E','⭐ ESTRELA'],['I','🏝️ ILHA'],['O','🥚 OVO'],['U','🍇 UVA']]);quiz('Com qual vogal começa?',q[1],q[0],pickOptions(q[0],['A','E','I','O','U']));break}
  case 'count':{q=chooseUnique([1,2,3,4,5,6,7,8,9]);let symbol=['⭐','🍎','🐞','🌼'][Math.floor(Math.random()*4)];opts=[String(q),String(q===1?2:q-1),String(q+1)];quiz('Quantos desenhos você vê?',(symbol+' ').repeat(q),String(q),opts);break}
- case 'body':{q=chooseUnique([['👀','olhos'],['👂','orelha'],['👃','nariz'],['👄','boca'],['🖐️','mão'],['🦶','pé']]);quiz('Onde estão os '+q[1]+'?','',q[0],pickOptions(q[0],['👀','👂','👃','👄','🖐️','🦶']));break}
+ case 'body':{q=chooseUnique([['👀','olhos'],['👂','orelha'],['👃','nariz'],['👄','boca'],['🖐️','mão'],['🦶','pé']]);quiz('Onde '+(q[1]==='olhos'?'estão os olhos':(q[1]==='nariz'||q[1]==='pé'?'está o ':'está a ')+q[1])+'?','',q[0],pickOptions(q[0],['👀','👂','👃','👄','🖐️','🦶']));break}
  case 'fruit':{q=chooseUnique(FRUITS);quiz('Qual é o nome desta fruta?',q[0],q[1],pickOptions(q[1],FRUITS.map(x=>x[1])));break}
  case 'syllable':{q=chooseUnique(WORDS);quiz('Complete a palavra: '+q[0]+' + __ = '+q[2], '',q[1],pickOptions(q[1],WORDS.map(x=>x[1])));break}
  case 'dictation':{q=chooseUnique(WORDS);let text='Toque em ouvir e escolha a palavra que você escutou.';gdata.answer=q[2];$('#test-board').innerHTML=`<p class="small">Rodada ${gdata.round+1} de 3</p><p>${text}</p><button class="primary" data-action="speak" data-speech="${q[2]}">🔊 Ouvir a palavra</button><div class="test-options">${pickOptions(q[2],WORDS.map(x=>x[2])).map(x=>`<button class="mat-tile" data-action="new-choice" data-value="${x}">${x}</button>`).join('')}</div>`;break}
