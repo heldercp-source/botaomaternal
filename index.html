@@ -564,6 +564,26 @@ body{background:radial-gradient(ellipse at 15% 0%,var(--bg-a,#34549a) 0,transpar
 .story-wrap .st-cover-art .new-story-picture { object-fit:cover; }
 </style>
 <style>.exp-wrap{min-height:100%;width:100%;max-width:none!important;padding:10px!important;overflow:auto}.exp-wrap h2{font-size:1.25rem;margin:.35rem}.exp-wrap .test-prompt{font-size:1rem;margin:.4rem}.exp-grid{display:grid;gap:5px;width:min(90vw,300px);margin:8px auto}.exp-grid.four{grid-template-columns:repeat(4,1fr)}.exp-grid.three{grid-template-columns:repeat(3,1fr)}.exp-grid button,.exp-row button,.exp-scene button{min-height:48px;border-radius:12px;border:2px solid #b2d99d;background:#faffed;font-size:1.55rem;color:#214d35;cursor:pointer}.exp-grid button{aspect-ratio:1;position:relative}.exp-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:10px 0}.exp-row button{padding:8px}.exp-scene{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:8px auto}.exp-scene button{width:90px;min-height:84px;background:#cff0fc}.exp-scene small{display:block;font-size:.72rem}.exp-selected{outline:4px solid orange}.exp-big{font-size:4rem}.exp-leaves{opacity:.36}.exp-find-item{position:absolute;left:34%;top:21%;font-size:1.5rem}.exp-wrap #exp-msg{min-height:1.5em;font-weight:bold}
+/* Colmeia dos Números: arte e estilos próprios, isolados do restante. */
+#modal.game-view .hny-shell.dialog.mat{box-sizing:border-box;height:100vh;height:100dvh;min-height:0;max-height:100dvh;padding:8px;display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(#d9f5ff,#f4ffda);color:#263046}
+.hny-shell .hny-header{flex:none;width:min(100%,800px);margin:0 auto;background:#fff9dc;border:2px solid #e4b247;border-radius:14px;padding:6px;box-sizing:border-box}
+.hny-shell .hny-top{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
+.hny-shell .hny-nav{font-size:14px;min-height:44px;padding:4px 9px;border:2px solid #845514;border-radius:10px;background:#fff;color:#41300e;font-weight:800}
+.hny-shell h2{margin:3px 0;text-align:center;font-size:19px}
+.hny-shell .hny-status{display:flex;justify-content:space-around;align-items:center;gap:4px;flex-wrap:wrap;font-size:14px;font-weight:800}
+.hny-shell .hny-target{background:#fff;border-radius:9px;border:2px solid #b97913;padding:2px 9px;font-size:19px;color:#6c3600}
+.hny-shell .hny-feedback{height:1.4em;text-align:center;font-weight:800;color:#6e3300}
+.hny-shell .hny-scroll{flex:1;min-height:0;width:min(100%,800px);margin:5px auto 0;overflow:auto;overscroll-behavior:contain;border:2px solid #c6a968;border-radius:12px;background:linear-gradient(#d6f3ff,#e3f5be);box-sizing:border-box}
+.hny-shell .hny-tip{text-align:center;font-size:13px;font-weight:bold;margin:5px}
+.hny-shell .hny-grid{position:relative;width:362px;height:510px;margin:4px auto 16px}
+.hny-shell .hny-cell{position:absolute;width:46px;height:48px;padding:0;border:0;background:transparent;color:#73210e;font-weight:900;font-size:22px;line-height:1;touch-action:manipulation;display:flex;align-items:center;justify-content:center;opacity:1}
+.hny-shell .hny-cell::before{content:'';position:absolute;inset:0;clip-path:polygon(25% 1%,75% 1%,100% 50%,75% 99%,25% 99%,0% 50%);background:#a95608;z-index:0}
+.hny-shell .hny-cell::after{content:'';position:absolute;inset:3px;clip-path:polygon(25% 1%,75% 1%,100% 50%,75% 99%,25% 99%,0% 50%);background:#ffd057;z-index:0}
+.hny-shell .hny-cell span{position:relative;z-index:1}.hny-shell .hny-cell .hny-mark{position:absolute;z-index:2;right:3px;bottom:2px;font-size:15px;color:#fff;background:#176b2d;border-radius:50%;width:17px;height:17px;line-height:17px}
+.hny-shell .hny-cell.is-done::before{background:#176b2d}.hny-shell .hny-cell.is-done::after{background:#78cf80}.hny-shell .hny-cell.is-done{color:#083913;opacity:1}
+.hny-shell .hny-cell.is-bad::before{background:#891f20}.hny-shell .hny-cell.is-bad::after{background:#f36e66}.hny-shell .hny-cell.is-bad{opacity:.72}.hny-shell .hny-cell.is-bad .hny-mark{background:#a40000}
+.hny-shell .hny-cell:focus-visible{outline:3px solid #123fa9;outline-offset:1px}.hny-shell .hny-end{text-align:center;padding:18px;font-size:18px}.hny-shell .hny-big{min-height:48px;border:2px solid #6d4705;border-radius:12px;padding:8px 16px;background:#ffe29b;font-size:17px;font-weight:bold;color:#422b06}
+
 </style><style>
 /* Mundo Mágico Kids — módulo Pré-Escolar; classes restritas ao módulo. */
 #modal.game-view .pex-shell{background:#e7f8ed;color:#29385d;min-height:100vh;min-height:100dvh;padding:clamp(10px,2vw,22px);display:flex;flex-direction:column;align-items:center;text-align:center;overflow:auto}
@@ -1701,6 +1721,39 @@ AREAS.floresta.games.push(...PEX_GAMES);
 const pexOldStart=newStart;newStart=function(game){if(String(game).startsWith('pex-'))return start(game);return pexOldStart(game)};
 const pexOldHandle=handleAction;handleAction=function(b){const a=b.dataset.action||'';if(a.startsWith('pex-'))return action(a.slice(4),b);return pexOldHandle(b)};
 })();
+
+/* Jogo independente: Colmeia dos Números. */
+(function(){
+'use strict';
+const gameId='hny-colmeia';
+AREAS.floresta.games.push(['🐝','Colmeia dos Números',gameId]);
+let stateHive=null, voiceVariant=0;
+const oldOpen=openModal, oldClose=closeModal, oldStart=newStart, oldAction=handleAction;
+function cleanup(){if(!stateHive)return;clearInterval(stateHive.clock);stateHive.badTimers.forEach(clearTimeout);stateHive=null;try{if(window.speechSynthesis)window.speechSynthesis.cancel()}catch(e){}}
+openModal=function(...args){cleanup();return oldOpen.apply(this,args)};
+closeModal=function(...args){cleanup();return oldClose.apply(this,args)};
+newStart=function(id){if(id===gameId)return start();return oldStart.apply(this,arguments)};
+handleAction=function(button){const action=button.dataset.action||'';if(action.startsWith('hny-'))return handle(action,button);return oldAction.apply(this,arguments)};
+function timeString(ms){let s=Math.floor(ms/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function sayTarget(intro){if(!stateHive||stateHive.target==null)return;voiceVariant++;let n=stateHive.target;let phrase=(voiceVariant%2?'Toque no número ':'Encontre o número ')+n+'.';speak(intro?'Vamos brincar na colmeia! Toque no número pedido. '+phrase:phrase)}
+function start(){refreshDay();if(timeLeft()<=0){showTimeLimit();return}gameSerial++;matToken++;gameNow=gameId;sessionActive=true;activeMission=null;limitShown=false;$('#modal').classList.add('game-view');
+ openModal(`<div class="dialog mat hny-shell"><header class="hny-header"><div class="hny-top"><button type="button" class="hny-nav" data-action="hny-back">⬅ Jogos</button><button type="button" class="hny-nav" data-action="hny-close">🗺️ Áreas</button><button type="button" class="hny-nav" data-action="hny-hear">🔊 Ouvir</button><button type="button" class="hny-nav" data-action="hny-restart">🔄 Recomeçar</button></div><h2 id="dialogTitle">🐝 Colmeia dos Números</h2><div class="hny-status"><span id="hny-round"></span><span>⏱ <span id="hny-time">00:00</span></span><span id="hny-progress"></span><span id="hny-target" class="hny-target"></span></div><div id="hny-feedback" class="hny-feedback" role="status" aria-live="polite"></div></header><div class="hny-scroll" id="hny-scroll" tabindex="0" aria-label="Colmeia: role para ver todos os números"><p class="hny-tip">⬆️⬇️ Deslize para ver toda a colmeia ↔️</p><div id="hny-board"></div></div></div>`,true);
+ stateHive={round:0,results:[],badTimers:[],clock:null,target:null,cells:[],hits:0,start:0,finished:false};makeRound(true)
+}
+function makeRound(intro){let h=stateHive;h.hits=0;h.finished=false;h.start=Date.now();h.cells=[];for(let n=1;n<=10;n++)for(let j=0;j<7;j++)h.cells.push({n:n,done:false});for(let i=h.cells.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[h.cells[i],h.cells[j]]=[h.cells[j],h.cells[i]]}h.target=null;
+ $('#hny-scroll').scrollTop=0;$('#hny-scroll').scrollLeft=0;$('#hny-board').innerHTML='<div class="hny-grid">'+h.cells.map((c,i)=>`<button type="button" class="hny-cell" data-action="hny-cell" data-index="${i}" aria-label="Número ${c.n}" style="left:${(i%7)*48+(Math.floor(i/7)%2)*24}px;top:${Math.floor(i/7)*50}px"><span>${c.n}</span></button>`).join('')+'</div>';
+ $('#hny-feedback').textContent='';$('#hny-round').textContent='Rodada '+(h.round+1)+'/10';$('#hny-progress').textContent='✓ 0/70';$('#hny-time').textContent='00:00';clearInterval(h.clock);h.clock=setInterval(()=>{if(stateHive===h&&!h.finished&&$('#hny-time'))$('#hny-time').textContent=timeString(Date.now()-h.start)},250);nextTarget();sayTarget(intro)
+}
+function nextTarget(){let remaining=stateHive.cells.filter(c=>!c.done);stateHive.target=remaining[Math.floor(Math.random()*remaining.length)].n;$('#hny-target').textContent='🎯 '+stateHive.target}
+function finishRound(){let h=stateHive;h.finished=true;clearInterval(h.clock);let elapsed=Date.now()-h.start;h.results.push(elapsed);$('#hny-time').textContent=timeString(elapsed);$('#hny-target').textContent='🎉 Concluída';$('#hny-feedback').textContent='✓ Muito bem!';let final=h.round===9;$('#hny-board').innerHTML=`<div class="hny-end"><div style="font-size:52px">${final?'🏆':'🍯'}</div><h3>${final?'Você terminou as 10 rodadas!':'Rodada concluída!'}</h3><p>⏱ Tempo: ${timeString(elapsed)}</p>${final?'<p>'+h.results.map((t,i)=>'Rodada '+(i+1)+': '+timeString(t)).join(' · ')+'</p>':''}<button type="button" class="hny-big" data-action="${final?'hny-restart':'hny-next'}">${final?'🔄 Jogar novamente':'➡️ Próxima rodada'}</button></div>`;$('#hny-scroll').scrollTop=0;speak(final?'Parabéns! Você terminou as dez rodadas!':'Muito bem! Você completou a rodada!')}
+function handle(action,button){let h=stateHive;if(!h)return;
+ if(action==='hny-back'){gameMenu('floresta');return}if(action==='hny-close'){closeModal();return}if(action==='hny-restart'){start();return}if(action==='hny-hear'){if(h.finished)speak(h.round===9?'Você terminou as dez rodadas!':'Rodada concluída!');else sayTarget(false);return}if(action==='hny-next'){if(h.finished&&h.round<9){h.round++;makeRound(false)}return}
+ if(action!=='hny-cell'||h.finished)return;let i=Number(button.dataset.index),c=h.cells[i];if(!c||c.done)return;
+ if(c.n!==h.target){button.classList.add('is-bad');button.innerHTML='<span>'+c.n+'</span><span class="hny-mark" aria-hidden="true">×</span>';$('#hny-feedback').textContent='✕ Tente outro número!';let timer=setTimeout(()=>{if(stateHive!==h||!button.isConnected||c.done)return;button.classList.remove('is-bad');button.innerHTML='<span>'+c.n+'</span>';if($('#hny-feedback'))$('#hny-feedback').textContent=''},900);h.badTimers.push(timer);return}
+ c.done=true;h.hits++;button.classList.remove('is-bad');button.classList.add('is-done');button.disabled=true;button.setAttribute('aria-label','Número '+c.n+', encontrado');button.innerHTML='<span>'+c.n+'</span><span class="hny-mark" aria-hidden="true">✓</span>';$('#hny-progress').textContent='✓ '+h.hits+'/70';$('#hny-feedback').textContent='✓ Muito bem!';if(h.hits===70){finishRound();return}nextTarget();sayTarget(false)
+}
+})();
+
 
 /* Mundo Mágico Kids — módulo Fundamental independente (FND1). Inserir dentro do script principal. */
 (function(){
