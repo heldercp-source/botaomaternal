@@ -1643,7 +1643,7 @@ function makeMaze(){
 }
 function specialSetup(){
  if(id==='vogais'){let name=nextFruit();data.name=name;data.letters=Array.from(name);data.taken=[];data.want=round%2===0?'vogais':'consoantes';prompt('Toque em todas as '+data.want+' da palavra '+name.toLowerCase()+'.');drawSpecialVowels();return true}
- if(id==='feira'){fairBasket=[];data.taken=[];do{data.items=randomList(fruitNames.slice(0,21)).slice(0,20)}while(data.items.join('|')===previousFairItems);previousFairItems=data.items.join('|');if(round===0)prompt('Vamos fazer uma salada de frutas!');else byid('pex-prompt').textContent='Vamos fazer uma salada de frutas!';drawSpecialFair();return true}
+ if(id==='feira'){fairBasket=[];data.taken=[];do{data.items=randomList(fruitNames.slice(0,21)).slice(0,20)}while(data.items.join('|')===previousFairItems);previousFairItems=data.items.join('|');if(round===0)prompt('Vamos fazer uma salada de frutas. Escolha 10 frutas!');else byid('pex-prompt').textContent='Vamos fazer uma salada de frutas. Escolha 10 frutas!';drawSpecialFair();return true}
  if(id==='lagarta'){data.maze=makeMaze();prompt('Ajude a lagarta a chegar à maçã. Toque nas setas: verde é caminho livre; vermelho é parede.');drawSpecialTrail();return true}
  return false
 }
@@ -1663,7 +1663,7 @@ function start(game){const entry=PEX_GAMES.find(g=>g[2]===game);if(!entry)return
 function say(text){speak(text)}
 function prompt(text){byid('pex-prompt').textContent=text;say(text)}
 function msg(text,voice=false){byid('pex-feedback').textContent=text;if(voice)say(text)}
-function win(){if(done)return;done=true;if(id==='feira'){let message=round===0?'Parabéns! Agora vamos fazer de outra forma. Escolha outras frutas!':'Parabéns!';msg(message);say(message)}else msg('🎉 Muito bem! Você conseguiu!',true);byid('pex-board').insertAdjacentHTML('beforeend',round<total()-1?'<p><button class="pex-next" data-action="pex-next">➡️ Próxima rodada</button></p>':'<p>🌟 Você terminou todas as rodadas!</p><button class="pex-next" data-action="pex-replay">🔄 Jogar novamente</button>')}
+function win(){if(done)return;done=true;if(id==='feira'){let message='Parabéns! Vamos fazer de outra forma. Escolha 10 frutas diferentes!';msg(message);say(message)}else msg('🎉 Muito bem! Você conseguiu!',true);byid('pex-board').insertAdjacentHTML('beforeend',round<total()-1?'<p><button class="pex-next" data-action="pex-next">➡️ Próxima rodada</button></p>':'<p>🌟 Você terminou todas as rodadas!</p><button class="pex-next" data-action="pex-replay">🔄 Jogar novamente</button>')}
 function setup(){done=false;data={};msg('');const b=byid('pex-board');
  if(specialSetup()){byid('pex-round').textContent=`Rodada ${round+1} de ${total()}`;return}
  if(id==='vogais'){data.taken=[];prompt('Encontre e toque em todas as vogais da palavra.');drawVowels()}
